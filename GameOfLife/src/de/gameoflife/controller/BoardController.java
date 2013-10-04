@@ -1,45 +1,53 @@
 package de.gameoflife.controller;
 
-import de.gameoflife.model.Board;
+import de.gameoflife.model.BoardModel;
+import de.gameoflife.view.BoardView;
 
 public class BoardController {
 
-	public static void main(String[] args) {
-		Board myBoard = new Board(10);
-		startGame(myBoard);
+	BoardModel myBoard = new BoardModel(10);
+	BoardView myBoardView = new BoardView(myBoard.getBoardSize());
+	
+	public BoardController() {
+		myBoardView.setBoardController(this);
+		startGame();
+
 	}
 
-	private static void startGame(Board board) {
-		while (!isGameOver(board)) {
-			updateView(board);
-			nextRound(board);
+	private void startGame() {
+		int c = 1;
+		while (!isGameOver()) {
+			System.out.println("Round: " + c + "\n");
+			updateView();
+			nextRound();
+			c++;
 		}
 	};
-	
-	private static void updateView(Board board) {
-		for (int i = 0; i < board.getBoardSize(); i++) {
-			for (int j = 0; j < board.getBoardSize(); j++) {
+
+	private void updateView() {
+		for (int i = 0; i < myBoard.getBoardSize(); i++) {
+			for (int j = 0; j < myBoard.getBoardSize(); j++) {
 				// iterate through labels
 				// board.getStatus(i, j);
 			}
 		}
 	};
 
-	private static void nextRound(Board board) {
-		for (int i = 0; i < board.getBoardSize(); i++) {
-			for (int j = 0; j < board.getBoardSize(); j++) {
-				board.statusInNextRound(i, j);
+	public void nextRound() {
+		for (int i = 0; i < myBoard.getBoardSize(); i++) {
+			for (int j = 0; j < myBoard.getBoardSize(); j++) {
+				myBoard.statusInNextRound(i, j);
 			}
 		}
-		for (int i = 0; i < board.getBoardSize(); i++) {
-			for (int j = 0; j < board.getBoardSize(); j++) {
-				board.updateStatus(i, j);
+		for (int i = 0; i < myBoard.getBoardSize(); i++) {
+			for (int j = 0; j < myBoard.getBoardSize(); j++) {
+				myBoard.updateStatus(i, j);
 			}
 		}
 	}
-	
-	private static boolean isGameOver(Board board) {
-		return 0 == board.numberOfLivingCells(); 
+
+	private boolean isGameOver() {
+		return 0 == myBoard.numberOfLivingCells();
 	}
-	
+
 }

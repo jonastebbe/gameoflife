@@ -1,11 +1,11 @@
 package de.gameoflife.model;
 
-public class Cell {
+public class CellModel {
 
 	private boolean isAlive;
 	private boolean willBeAlive;
 	
-	public Cell(boolean isAlive) {
+	public CellModel(boolean isAlive) {
 		super();
 		this.isAlive = isAlive;
 	}

@@ -1,19 +1,19 @@
 package de.gameoflife.model;
 
-import de.gameoflife.model.Cell;
+import de.gameoflife.model.CellModel;
 import de.gameoflife.utils.Helper;
 
-public class Board {
+public class BoardModel {
 
-	private Cell[][] cells;
+	private CellModel[][] cells;
 	private int boardSize = 5;
 
-	public Board() {
-		new Board(boardSize);
+	public BoardModel() {
+		new BoardModel(boardSize);
 	}
 
-	public Board(int boardSize) {
-		cells = new Cell[boardSize][boardSize];
+	public BoardModel(int boardSize) {
+		cells = new CellModel[boardSize][boardSize];
 		this.boardSize = boardSize;
 		populate();
 	}
@@ -22,12 +22,12 @@ public class Board {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
 
-				cells[i][j] = new Cell(Helper.getRandomBoolean());
+				cells[i][j] = new CellModel(Helper.getRandomBoolean());
 			}
 		}
 	}
 
-	public Cell[][] getCells() {
+	public CellModel[][] getCells() {
 		return cells;
 	}
 
