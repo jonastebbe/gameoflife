@@ -2,8 +2,6 @@ package de.gameoflife.view;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -18,39 +16,65 @@ public class BoardViewSWT implements BoardView {
 	private Shell shell;
 	private static Display display = new Display();
 	private Table table;
-	public Button btnNextRound;
+	private Button btnNextRound;
+	private Button btnResetGame;
+	private int boardSize;
 
 	public BoardViewSWT() {
+		new BoardViewSWT(10);
+	}
+
+	public BoardViewSWT(int boardSize) {
+		this.boardSize = boardSize;
 		shell = new Shell();
 		shell.setText("Game of Life");
+		shell.setSize(600, 600);
 		init(shell);
 	}
 
 	private void init(Shell s) {
 		shell.setLayout(new GridLayout());
 		initTable();
+		initBtnNextRound();
+		initBtnResetGame();
+	}
+
+	private void initBtnNextRound() {
 		btnNextRound = new Button(shell, SWT.NONE);
 		btnNextRound.setText("Next Round");
 		btnNextRound.setLayoutData(new GridData(GridData.FILL, GridData.CENTER,
 				true, false));
-		start();
 	}
 
+	private void initBtnResetGame() {
+		btnResetGame = new Button(shell, SWT.NONE);
+		btnResetGame.setText("Reset Game");
+		btnResetGame.setLayoutData(new GridData(GridData.FILL, GridData.CENTER,
+				true, false));
+	}
+	
 	private void initTable() {
 		table = new Table(shell, SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
 		table.setLinesVisible(false);
 		table.setHeaderVisible(false);
 		GridData data = new GridData(SWT.FILL, SWT.FILL, true, true);
-		data.heightHint = 400;
+		data.heightHint = 600;
 		table.setLayoutData(data);
-
+		for (int i = 0; i < boardSize; i++) {
+			TableColumn tc1 = new TableColumn(table, SWT.CENTER);
+			tc1.setWidth(580 / boardSize);
+		}
 	}
 
-	public void addSelectionListener(SelectionAdapter listenForNextButton) {
+	public void addNextRoundListener(SelectionAdapter listenForNextButton) {
 		btnNextRound.addSelectionListener(listenForNextButton);
 	}
 
-	private void start() {
+	public void addResetGameListener(SelectionAdapter listenForResetButton) {
+		btnResetGame.addSelectionListener(listenForResetButton);
+	}
+	
+	public void start() {
 		shell.open();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch())
@@ -61,6 +85,18 @@ public class BoardViewSWT implements BoardView {
 
 	@Override
 	public void updateView(boolean[][] cells, int boardSize) {
-		// TODO Auto-generated method stub
+		table.removeAll();
+		for (int i = 0; i < boardSize; i++) {
+			TableItem item1 = new TableItem(table, SWT.NONE);
+			String[] values = new String[boardSize];
+			for (int j = 0; j < boardSize; j++) {
+				if (cells[i][j]) {
+					values[j] = "x";
+				} else {
+					values[j] = " ";
+				}
+			}
+			item1.setText(values);
+		}
 	}
 }
