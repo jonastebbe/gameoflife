@@ -1,13 +1,15 @@
 package de.gameoflife.controller;
 
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+
 import de.gameoflife.model.BoardModel;
-import de.gameoflife.view.BoardViewConsole;
+import de.gameoflife.view.BoardViewSWT;
 
 public class BoardController {
 
 	private BoardModel myBoard;
-	// BoardViewSWT myBoardView = new BoardViewSWT(boardSize);
-	private BoardViewConsole myBoardView;
+	private BoardViewSWT myBoardView;
 	private int boardSize;
 
 	public BoardController() {
@@ -17,18 +19,33 @@ public class BoardController {
 	public BoardController(int boardSize) {
 		this.boardSize = boardSize;
 		myBoard = new BoardModel(boardSize);
-		myBoardView = new BoardViewConsole();
-		startGame();
-	
+		myBoardView = new BoardViewSWT(boardSize);
+		myBoardView.addNextRoundListener(new NextRoundListener());
+		myBoardView.addResetGameListener(new ResetGameListener());
+		myBoardView.updateView(convertCellArray(), boardSize);
+		myBoardView.start();
+
 	}
-	
-	private void startGame() {
-		int c = 1;
-		while (!isGameOver()) {
-			System.out.println("Round: " + c + "\n");
+
+	class NextRoundListener extends SelectionAdapter {
+		public void widgetSelected(SelectionEvent e) {
+			playRound();
+		}
+	}
+
+	class ResetGameListener extends SelectionAdapter {
+		public void widgetSelected(SelectionEvent e) {
+			myBoard = new BoardModel(boardSize);
+			myBoardView.updateView(convertCellArray(), boardSize);
+			
+		}
+	}
+
+	private void playRound() {
+		if (!isGameOver()) {
+			System.out.println("Round played!");
 			myBoardView.updateView(convertCellArray(), boardSize);
 			nextRound();
-			c++;
 		}
 	};
 

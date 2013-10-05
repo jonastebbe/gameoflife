@@ -1,4 +1,4 @@
-package de.gameoflife.utils;
+package de.gameoflife.main;
 
 import de.gameoflife.controller.BoardController;
 
