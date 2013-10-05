@@ -6,7 +6,7 @@ import de.gameoflife.utils.Helper;
 public class BoardModel {
 
 	private CellModel[][] cells;
-	private int boardSize = 5;
+	private int boardSize;
 
 	public BoardModel() {
 		new BoardModel(boardSize);
