@@ -41,9 +41,9 @@ public class BoardModel {
 	}
 
 	private void cellSurvives(int x, int y) {
-		int livingNeighbours = countLivingNeighbours(x, y);
+		int livingNeighbors = countLivingNeighbors(x, y);
 
-		if (livingNeighbours == 2 || livingNeighbours == 3) {
+		if (livingNeighbors == 2 || livingNeighbors == 3) {
 			cells[x][y].willBeAlive();
 		} else {
 			cells[x][y].willBeDead();
@@ -51,7 +51,7 @@ public class BoardModel {
 	}
 
 	private void cellRevives(int x, int y) {
-		int livingNeighbours = countLivingNeighbours(x, y);
+		int livingNeighbours = countLivingNeighbors(x, y);
 
 		if (livingNeighbours == 3) {
 			cells[x][y].willBeAlive();
@@ -60,7 +60,7 @@ public class BoardModel {
 		}
 	}
 
-	public void statusInNextRound(int i, int j) {
+	public void determineStatusForNextRound(int i, int j) {
 		if (cells[i][j].isAlive()) {
 			cellSurvives(i, j);
 		} else {
@@ -72,8 +72,8 @@ public class BoardModel {
 		cells[x][y].updateStatus();
 	}
 
-	private int countLivingNeighbours(int x, int y) {
-		int numberOfLivingNeighbours = 0;
+	private int countLivingNeighbors(int x, int y) {
+		int numberOfLivingNeighbors = 0;
 		int minX = x - 1;
 		int minY = y - 1;
 		int maxX = x + 1;
@@ -95,13 +95,13 @@ public class BoardModel {
 			for (int j = minY; j <= maxY; j++) {
 				if (!(i == x && j == y)) {
 					if (cells[i][j].isAlive()) {
-						numberOfLivingNeighbours++;
+						numberOfLivingNeighbors++;
 					}
 				}
 			}
 		}
 
-		return numberOfLivingNeighbours;
+		return numberOfLivingNeighbors;
 	}
 
 	public boolean getStatus(int x, int y) {

@@ -63,7 +63,7 @@ public class BoardController {
 	public void nextRound() {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
-				myBoard.statusInNextRound(i, j);
+				myBoard.determineStatusForNextRound(i, j);
 			}
 		}
 		for (int i = 0; i < boardSize; i++) {
