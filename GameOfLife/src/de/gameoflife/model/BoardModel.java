@@ -18,6 +18,11 @@ public class BoardModel {
 		populate();
 	}
 
+	public BoardModel(int boardSize, CellModel[][] cells) {
+		this.cells = cells;
+		this.boardSize = boardSize;
+	}
+
 	private void populate() {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
