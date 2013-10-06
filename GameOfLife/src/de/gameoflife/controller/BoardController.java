@@ -44,8 +44,8 @@ public class BoardController {
 	private void playRound() {
 		if (!isGameOver()) {
 			System.out.println("Round played!");
-			myBoardView.updateView(convertCellArray(), boardSize);
 			nextRound();
+			myBoardView.updateView(convertCellArray(), boardSize);
 		}
 	};
 

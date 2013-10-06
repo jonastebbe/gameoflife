@@ -86,8 +86,8 @@ public class BoardModel {
 			maxY = y;
 		}
 
-		for (int i = minX; i < maxX; i++) {
-			for (int j = minY; j < maxY; j++) {
+		for (int i = minX; i <= maxX; i++) {
+			for (int j = minY; j <= maxY; j++) {
 				if (!(i == x && j == y)) {
 					if (cells[i][j].isAlive()) {
 						numberOfLivingNeighbours++;
