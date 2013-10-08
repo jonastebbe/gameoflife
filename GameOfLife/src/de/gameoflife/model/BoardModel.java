@@ -1,9 +1,10 @@
 package de.gameoflife.model;
 
-import de.gameoflife.model.CellModel;
-import de.gameoflife.utils.Helper;
+import java.util.Random;
 
 public class BoardModel {
+
+	Random randomizer = new Random();
 
 	private CellModel[][] cells;
 	private int boardSize;
@@ -27,7 +28,7 @@ public class BoardModel {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
 
-				cells[i][j] = new CellModel(Helper.getRandomBoolean());
+				cells[i][j] = new CellModel(randomizer.nextBoolean());
 			}
 		}
 	}

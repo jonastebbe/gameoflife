@@ -61,8 +61,8 @@ public class BoardViewSWT implements BoardView {
 		data.heightHint = 600;
 		table.setLayoutData(data);
 		for (int i = 0; i < boardSize; i++) {
-			TableColumn tc1 = new TableColumn(table, SWT.CENTER);
-			tc1.setWidth(580 / boardSize);
+			TableColumn column = new TableColumn(table, SWT.CENTER);
+			column.setWidth(580 / boardSize);
 		}
 	}
 
@@ -84,19 +84,19 @@ public class BoardViewSWT implements BoardView {
 	}
 
 	@Override
-	public void updateView(boolean[][] cells, int boardSize) {
+	public void updateView(boolean[][] cells) {
 		table.removeAll();
-		for (int i = 0; i < boardSize; i++) {
-			TableItem item1 = new TableItem(table, SWT.NONE);
-			String[] values = new String[boardSize];
-			for (int j = 0; j < boardSize; j++) {
+		for (int i = 0; i < cells.length; i++) {
+			TableItem item = new TableItem(table, SWT.NONE);
+			String[] values = new String[cells.length];
+			for (int j = 0; j < cells[i].length; j++) {
 				if (cells[i][j]) {
 					values[j] = "x";
 				} else {
 					values[j] = " ";
 				}
 			}
-			item1.setText(values);
+			item.setText(values);
 		}
 	}
 }
