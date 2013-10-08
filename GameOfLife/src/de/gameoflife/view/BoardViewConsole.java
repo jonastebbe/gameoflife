@@ -3,11 +3,11 @@ package de.gameoflife.view;
 public class BoardViewConsole implements BoardView {
 
 	@Override
-	public void updateView(boolean[][] cells, int boardSize) {
+	public void updateView(boolean[][] cells) {
 		System.out
 				.println("---------------------------------------------------");
-		for (int i = 0; i < boardSize; i++) {
-			for (int j = 0; j < boardSize; j++) {
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells[i].length; j++) {
 				if (cells[i][j]) {
 					System.out.print("o ");
 				} else {

@@ -22,7 +22,7 @@ public class BoardController {
 		myBoardView = new BoardViewSWT(boardSize);
 		myBoardView.addNextRoundListener(new NextRoundListener());
 		myBoardView.addResetGameListener(new ResetGameListener());
-		myBoardView.updateView(convertCellArray(), boardSize);
+		myBoardView.updateView(convertCellArray());
 		myBoardView.start();
 
 	}
@@ -36,7 +36,7 @@ public class BoardController {
 	class ResetGameListener extends SelectionAdapter {
 		public void widgetSelected(SelectionEvent e) {
 			myBoard = new BoardModel(boardSize);
-			myBoardView.updateView(convertCellArray(), boardSize);
+			myBoardView.updateView(convertCellArray());
 			
 		}
 	}
@@ -45,7 +45,7 @@ public class BoardController {
 		if (!isGameOver()) {
 			System.out.println("Round played!");
 			nextRound();
-			myBoardView.updateView(convertCellArray(), boardSize);
+			myBoardView.updateView(convertCellArray());
 		}
 	};
 
